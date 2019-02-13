@@ -5,16 +5,16 @@ public class ShoppingCart implements Serializable {
 
 
     private final Customer customer;
-    ArrayList<Customer> costumer = new ArrayList<>();
+    ArrayList<Customer> costumer;
     ArrayList<Product> products = new ArrayList<Product>();
-    ArrayList<String> orderList = new ArrayList<>();
+    ArrayList<String> orderList;
 
-//    public ShoppingCart(Customer customer) {
-//    }
 
     ShoppingCart(Customer customer) {
 
         this.customer = customer;
+        costumer = new ArrayList<>();
+        orderList = new ArrayList<>();
     }
 
     public void addProduct(Product product) {

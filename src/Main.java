@@ -8,28 +8,28 @@ import static javax.swing.UIManager.getInt;
 
 public class Main {
 
-    static Scanner input = new Scanner(System.in);
-    private static Object getString;
-    private static CustomerRegister customerRegister;
-    private static ProductRegrister productRegrister;
+    static Scanner input = new Scanner(System.in); //Scanner för att läsa in
+
+//    private static Object getString;
+//    private static CustomerRegister customerRegister;
+//    private static ProductRegrister productRegrister;
+//    static AtomicInteger atomicInteger = new AtomicInteger(0);//    private static Object CustomerRegister;
+//    private Scanner scanner;
+//    private int productID;
+//    private Object String;
+//    private Object ShoppingCart;
+//    private Object ArrayList;
 
     private static Object Customer;
-   static ShoppingCart sc = new ShoppingCart((Customer) Customer);
-    static CustomerRegister cr = new CustomerRegister();
-    static ProductRegrister pr = new ProductRegrister();
-//    static AtomicInteger atomicInteger = new AtomicInteger(0);
+    static ShoppingCart sc = new ShoppingCart((Customer) Customer); //Arraylist
+    static CustomerRegister cr = new CustomerRegister(); // Arraylist
+    static ProductRegrister pr = new ProductRegrister(); // Arraylist
     static int id;
-    private static Object CustomerRegister;
-    private Scanner scanner;
-    private int productID;
-    private Object String;
-    private Object ShoppingCart;
-    private Object ArrayList;
 
 
     public static void main(String[] args) throws IOException {
 
-        Main mainObject = new Main();
+        Main mainObject = new Main(); //metod för att kunna kalla på objekt i main
         mainObject.restoreSettings();
 
 
@@ -49,7 +49,17 @@ public class Main {
 
             switch (readNumber()) {
                 case 0:
-                    System.out.println("Welcome back next time");
+                    System.out.println(" ________________________");
+                    System.out.println("|                        |");
+                    System.out.println("| Welcome back next time |");
+                    System.out.println("|                        |");
+                    System.out.println("|________________________|");
+                    System.out.println("          | |");
+                    System.out.println("          | |");
+                    System.out.println("          |_|  ");
+
+
+
                     mainObject.finishAndSave();
                     return;
                 case 1:
@@ -76,18 +86,19 @@ public class Main {
         }
 
     }
-
+    //visar en lista på produkter
     private void productList() {
         System.out.println(pr.products);
     }
 
+    //visar en lista på kunder
     private void customerList() {
 
-        System.out.println(cr.customers +  " " + pr.products);
+        System.out.println(cr.customers);
 
     }
 
-
+    //gör det möjligt att söka efter kunder med deras ID
     private void searchForCustomer() {
 
         System.out.println("Enter customerID:");
@@ -103,7 +114,7 @@ public class Main {
             totalPrice += product.getPrice();
 
         }
-       System.out.println("Total price: " + totalPrice);
+       System.out.println("Total price: " + totalPrice + " " + "kr");
 
                 try {
             System.out.println(cr.getCustomer(id));
@@ -117,8 +128,8 @@ public class Main {
         System.out.println("* Choose an option to continue *");
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         System.out.println("1. Add new product");
-        System.out.println("2. Finish, save and return to main menu");
-        System.out.println("0. Exit and leave");
+        System.out.println("2. Save and return to main menu");
+        System.out.println("0. Go back to main menu");
 
         switch (readNumber()) {
             case 0:
@@ -138,7 +149,7 @@ public class Main {
 
     }
 
-
+    //läser in det nummer du väljer från switch-satserna
     private static int readNumber() {
         Scanner sc = new Scanner(System.in);
         int temp = 0;
@@ -155,31 +166,45 @@ public class Main {
         return temp;
     }
 
+    //skapar en ny kund
     private void createNewCustomer() {
 
         System.out.println("Please enter your name: ");
         String name = input.nextLine();
         name = firstLetterToUppercase(name);
+        System.out.println("Please enter your lastname: ");
+        String lastname = input.nextLine();
+        lastname = firstLetterToUppercase(lastname);
         System.out.println("Please enter city: ");
         String city = input.nextLine();
         city = firstLetterToUppercase(city);
-        System.out.println("\n");
-        System.out.println("Welcome " + name + " from " + city + " your customer ID is: " + ++id);
+        //input.nextLine();
+        cr.addCustomer(new Customer(name, lastname, city, ++id));
+        System.out.println("Welcome " + name + " " + lastname + " from " + city + " your customer ID is: " + id);
         //System.out.println("Welcome " + name + " from " + city + " your customer ID is: " + atomicInteger.addAndGet(++id));
         System.out.println("\n");
-        cr.addCustomer(new Customer(name, city, id));
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         System.out.println("* Please pick another option to continue *");
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-        System.out.println("1. Add new product");
-        System.out.println("2. See your shoppingcart");
-        System.out.println("3. Finish and save");
-        System.out.println("4. Create another customer");
-        System.out.println("0. Exit and leave");
+        System.out.println(" -In order to add products, please save first!- ");
+        System.out.println("1. Save");
+        System.out.println("0. Go back to main menu");
 
         switch (readNumber()) {
             case 0:
                 return;
+            case 1:
+                finishAndSave();
+                break;
+            default:
+                System.out.println("Option not available!");
+        }
+        System.out.println("Thank you for saving! Please choose an option below ");
+        System.out.println("1. Add new product");
+        System.out.println("2. See your shoppingcart");
+        System.out.println("3. Create another customer");
+        System.out.println("4. Return to main menu");
+        switch (readNumber()){
             case 1:
                 addProductToCustomer();
                 break;
@@ -187,15 +212,16 @@ public class Main {
                 searchForCustomer();
                 break;
             case 3:
-                finishAndSave();
-                break;
-            case 4:
                 createNewCustomer();
                 break;
-            default:
-                System.out.println("Option not available!");
+            case 4:
+                return;
 
+                default:
+                    System.out.println("Something went wrong :(");
         }
+
+
         //System.out.println(atomicInteger.addAndGet(id));
 
         //int id = 0;
@@ -204,6 +230,7 @@ public class Main {
         //  customerRegister.customers.add(new Customer(String name, String city));
     }
 
+    //lägger till produkt till kundID
     private void addProductToCustomer() {
         System.out.println("Enter customerID: ");
         int chosenId = input.nextInt();
@@ -217,13 +244,32 @@ public class Main {
                 System.out.println(sc.products.get(i));
 
             System.out.println(pr.products);
-            System.out.println("Choose product: ");
+            input.nextLine();
+            System.out.println("Choose product by productID: ");
             int chosenProduct = input.nextInt();
             int productID = chosenProduct;
             Product product = pr.getProduct(productID);
             customer.customerList.add(product);
             System.out.println(customer);
             System.out.println(customer.customerList.toString());
+            System.out.println("\n" + "Product added");
+            System.out.println("Do you wish to add another product?");
+            System.out.println("1. Add another product");
+            System.out.println("2. Save");
+            System.out.println("3. Go back to main menu");
+            switch (readNumber()) {
+                case 1:
+                    addProductToCustomer();
+                    break;
+                case 2:
+                    finishAndSave();
+                    break;
+                case 3:
+                    return;
+                default:
+                    System.out.println("Oops! Something went wrong, try again!");
+            }
+
         }
     }
 
@@ -258,20 +304,23 @@ public class Main {
 //         return nummer;
 //    }
 
-
+    //lägger till ny produkt till produktlistan (sparas i en array)
     private void addNewProduct() {
 
         System.out.println("Enter a productname: ");
         String name = input.nextLine();
+        name = firstLetterToUppercase(name);
+        input.nextLine();
         System.out.println("Enter a category: ");
         String type = input.nextLine();
+        type = firstLetterToUppercase(type);
         System.out.println("Enter unit per piece/kg/l: ");
         String unit = input.nextLine();
         System.out.println("Enter price per unit: ");
         int price = input.nextInt();
        input.nextLine();
         System.out.println("\n");
-        System.out.println("Product added as: " + "\n" + name + "\n" + type + "\n" + "Price per unit: " + price + "kr/" + unit + "piece/kg/l");
+        System.out.println("Product added as: " + "\n" + name + "\n" + type + "\n" + "Price per unit: " + price + "kr/" + " " +  unit + " " + "piece/kg/l");
         System.out.println("\n");
         sc.addProduct(new Product(name, type, unit, price));
         pr.addNewProduct(new Product(name, type, unit, price));
@@ -279,10 +328,9 @@ public class Main {
         System.out.println("^^^^^^^^^^^^^^^^^^^");
         System.out.println("* Do you wish to: *");
         System.out.println("^^^^^^^^^^^^^^^^^^^");
-        System.out.println("1. Add another product");
-        System.out.println("2. See your shoppingcart");
-        System.out.println("3. Finish and save");
-        System.out.println("0. Exit and leave");
+        System.out.println("1. Add another product to the store");
+        System.out.println("2. Finish and save");
+        System.out.println("0. Go back to main menu");
 
 
         switch (readNumber()) {
@@ -292,9 +340,6 @@ public class Main {
                 addNewProduct();
                 break;
             case 2:
-                searchForCustomer();
-                break;
-            case 3:
                 finishAndSave();
                 break;
             default:
@@ -304,6 +349,7 @@ public class Main {
 
     }
 
+    //metod för att spara en bin-fil
     void finishAndSave()
         {
             //File file = new File("C:\\Users\\Martin\\Documents\\books.bin");
@@ -323,11 +369,11 @@ public class Main {
                 e.printStackTrace();
             }
 
-            System.out.println("Save successfull");
+            System.out.println("Save successful");
             return;
         }
 
-
+    //återställer och hämtar från bin-fil
     void restoreSettings(){
         //File file = new File("C:\\Users\\Martin\\Documents\\books.bin");
         String path = System.getProperty("user.home")
@@ -354,7 +400,7 @@ public class Main {
         }
     }
 
-
+    //omvandlar första bokstaven till stor
     public static String firstLetterToUppercase(String input) {
 
         String first = input.substring(0, 1).toUpperCase();

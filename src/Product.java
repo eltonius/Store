@@ -50,7 +50,7 @@ public class Product implements Serializable {
     }
 
     public static int getProductCount() {
-        return productCount;
+        return ++productCount;
     }
 
     public static void setProductCount(int productCount) {
@@ -70,7 +70,7 @@ public class Product implements Serializable {
     public String toString() {
 
         return "\n" + "Product ID: " + productID + "\n" + "Product name: " + name + "\n" + "Category: " + type + "\n"
-                + "Price: " + price + "kr" + " " +  unit + " " + "piece/kg/l" + "\n";
+                + "Price: " + price + "kr" + " " +  unit + " " + "per piece/kg/l" + "\n";
 
     }
 }
