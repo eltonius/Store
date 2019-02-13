@@ -21,6 +21,6 @@ public class ProductRegrister implements Serializable {
 
     @Override
     public String toString() {
-        return "Product Regrister" + "\n" + "Products: " + products;
+        return "Product Regrister" + "\n" + "Products: " + products + "\n";
     }
 }

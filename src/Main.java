@@ -105,8 +105,8 @@ public class Main {
         int chosenId = input.nextInt();
         int id = chosenId;
         Customer customer = cr.getCustomer(id);
-//        System.out.println(customer);
-//        System.out.println(customer.customerList.toString());
+        System.out.println(customer);
+        System.out.println(customer.customerList.toString());
 
         float totalPrice = 0;
 
@@ -114,10 +114,12 @@ public class Main {
             totalPrice += product.getPrice();
 
         }
-       System.out.println("Total price: " + totalPrice + " " + "kr");
+       //System.out.println("Total price: " + totalPrice + " " + "kr");
 
                 try {
-            System.out.println(cr.getCustomer(id));
+            //System.out.println(cr.getCustomer(id));
+            //System.out.println(sc.getProducts());
+            System.out.println("Total price: " + totalPrice + " " + "kr");
 
         } catch (IndexOutOfBoundsException e){
             System.out.println("Customer does not exist!");
@@ -252,7 +254,7 @@ public class Main {
             customer.customerList.add(product);
             System.out.println(customer);
             System.out.println(customer.customerList.toString());
-            System.out.println("\n" + "Product added");
+            System.out.println("\n" + "*** Product added ***" + "\n");
             System.out.println("Do you wish to add another product?");
             System.out.println("1. Add another product");
             System.out.println("2. Save");
