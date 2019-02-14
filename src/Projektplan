@@ -1,0 +1,39 @@
+Projektplan för program i Java (Kurs: Utveckling av applikationer och tjänster)
+
+
+För att kunna genomföra denna uppgift behöver jag en idé samt verktyg och metoder för att
+kunna nå ett slutmål.  
+
+Program som används:
+
+Github - för att ladda upp mitt program och ha ett säkert förvaringsställe
+IntelliJ IDEA - för att kunna skapa mitt program
+Slack - för att kommunicera med övriga klasskamrater.
+
+För tillfället saknar jag en metod för att utföra detta, min plan är att bara börja koda.
+Jag ska börja med att fundera över vilka typer av klasser jag behöver och utveckla min metod därefter.
+Eftersom jag helt saknar erfarenhet inom programmering så väljer jag detta arbetssätt för att det är en
+mer hållbar plan, då kan jag se på vägen vad som behövdes läggas till, vad som saknas osv.
+
+Målet är att skapa en applikation som hanterar en affär med kunder och varor.
+
+Programmet ska bestå av
+Customer - varje kund ska ha ett unikt ID, name och city
+Products - varje produkt ska ha ett unikt ID, name, type, unit och price.
+Kunder ska kunna lagras och kopplas ihop med varor, även nya kunder ska kunna registreras.
+Produkter ska kunna lagras och nya varor ska kunna registreras.
+Man ska kunna spara
+En lista på produkter ska kunna visas
+Kundlista ska kunna visas
+Man ska kunna söka efter kunder med ID-nummer
+
+Programmet ska testas Blackbox testing - med en plan på tester som genomförs
+Whitebox testing - i den mån det går  Krav på testerna:
+Kunder och produkter ska börja med stor bokstav. Alla kunder/produkter ska kunna listas, totala
+kostnaden för en kund ska listas.
+
+Färdigställandet av projektet: Jag har under den tid jag programmerat och utvecklat min applikation ansett
+att den metod jag valde att bara börja fungerade relativt bra. Jag har eftersökt och lärt mig mer med tiden,
+jag har även diskuterat med klasskamrater och fått ökad förståelse för projektet samt programmering.
+Skulle jag göra om applikationen så skulle jag med största sannolikhet göra annorlunda.
+
