@@ -18,11 +18,5 @@ class CustomerRegisterTest {
 
     }
 
-
-    @Test
-    void checksToSeeIfMethod_getCustomer_Works() {
-
-;
-    }
-
+    
 }

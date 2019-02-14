@@ -59,7 +59,6 @@ public class Main {
                     System.out.println("          |_|  ");
 
 
-
                     mainObject.finishAndSave();
                     return;
                 case 1:
@@ -89,6 +88,7 @@ public class Main {
         }
 
     }
+
     //visar en lista på produkter
     private void productList() {
         System.out.println(pr.products);
@@ -113,17 +113,17 @@ public class Main {
 
         float totalPrice = 0;
 
-        for(Product product:customer.shoppingCartList) {
+        for (Product product : customer.shoppingCartList) {
             totalPrice += product.getPrice();
         }
         System.out.println("Total price: " + totalPrice + " " + "kr");
 
-                try {
+        try {
 //            System.out.println(cr.getCustomer(id));
             //System.out.println(sc.getProducts());
-        //    System.out.println("Total price: " + totalPrice + " " + "kr");
+            //    System.out.println("Total price: " + totalPrice + " " + "kr");
 
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Customer does not exist!");
             System.out.println();
         }
@@ -146,10 +146,9 @@ public class Main {
                 finishAndSave();
                 break;
 
-                default:
-                    System.out.println("Invalid option");
+            default:
+                System.out.println("Invalid option");
         }
-
 
 
     }
@@ -185,7 +184,7 @@ public class Main {
         String city = input.nextLine();
         city = firstLetterToUppercase(city);
         //input.nextLine();
-        cr.addCustomer(new Customer(name, lastname, city, cr.customers.size()+1)); //sparar i array
+        cr.addCustomer(new Customer(name, lastname, city, cr.customers.size() + 1)); //sparar i array
         System.out.println("Welcome " + name + " " + lastname + " from " + city + " your customer ID is: " + cr.customers.size());
         //System.out.println("Welcome " + name + " from " + city + " your customer ID is: " + atomicInteger.addAndGet(++id));
         System.out.println("\n");
@@ -210,7 +209,7 @@ public class Main {
         System.out.println("2. See your shoppingcart");
         System.out.println("3. Create another customer");
         System.out.println("4. Return to main menu");
-        switch (readNumber()){
+        switch (readNumber()) {
             case 1:
                 addProductToCustomer();
                 break;
@@ -223,8 +222,8 @@ public class Main {
             case 4:
                 return;
 
-                default:
-                    System.out.println("Something went wrong :(");
+            default:
+                System.out.println("Something went wrong :(");
         }
 
 
@@ -325,9 +324,9 @@ public class Main {
         String unit = input.nextLine();
         System.out.println("Enter price per unit: ");
         int price = input.nextInt();
-       input.nextLine();
+        input.nextLine();
         System.out.println("\n");
-        System.out.println("Product added as: " + "\n" + name + "\n" + type + "\n" + "Price per unit: " + price + "kr/" + " " +  unit + " " + "piece/kg/l");
+        System.out.println("Product added as: " + "\n" + name + "\n" + type + "\n" + "Price per unit: " + price + "kr/" + " " + unit + " " + "piece/kg/l");
         System.out.println("\n");
         sc.addProduct(new Product(name, type, unit, price));
         pr.addNewProduct(new Product(name, type, unit, price));
@@ -357,31 +356,30 @@ public class Main {
     }
 
     //metod för att spara en bin-fil
-     void finishAndSave()
-        {
-            //File file = new File("C:\\Users\\Martin\\Documents\\books.bin");
-            String path = System.getProperty("user.home")
-                    + File.separator + "Documents"
-                    + File.separator + "regrister.bin";
-            File file = new File(path);
-            //Save object to file, run before closing the program
-            try (ObjectOutputStream out =
-                         new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
-                out.writeObject(cr.customers);
-                out.writeObject(pr.products);
-                //out.writeObject();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println("Save successful");
-            return;
+    void finishAndSave() {
+        //File file = new File("C:\\Users\\Martin\\Documents\\books.bin");
+        String path = System.getProperty("user.home")
+                + File.separator + "Documents"
+                + File.separator + "regrister.bin";
+        File file = new File(path);
+        //Save object to file, run before closing the program
+        try (ObjectOutputStream out =
+                     new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
+            out.writeObject(cr.customers);
+            out.writeObject(pr.products);
+            //out.writeObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+        System.out.println("Save successful");
+        return;
+    }
+
     //återställer och hämtar från bin-fil
-    void restoreSettings(){
+    void restoreSettings() {
         //File file = new File("C:\\Users\\Martin\\Documents\\books.bin");
         String path = System.getProperty("user.home")
                 + File.separator + "Documents"
@@ -415,8 +413,5 @@ public class Main {
 
         return first + rest; //metoden returnerar variablerna first och rest
     }
-}
 
-
-
-
+    }
