@@ -1,5 +1,4 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,7 +7,7 @@ import static javax.swing.UIManager.getInt;
 
 public class Main {
 
-    static Scanner input = new Scanner(System.in); //Scanner för att läsa in
+    static Scanner input = new Scanner(System.in); //Scanner för att läsa in värde från användaren
 
 //    private static Object getString;
 //    private static CustomerRegister customerRegister;
@@ -26,7 +25,7 @@ public class Main {
     static ProductRegrister pr = new ProductRegrister(); // Arraylist
     static int id;
 
-
+    //programmet startar här!
     public static void main(String[] args) throws IOException {
 
         Main mainObject = new Main(); //metod för att kunna kalla på objekt i main
@@ -44,7 +43,8 @@ public class Main {
             System.out.println("3. Add new product to store");
             System.out.println("4. Customerlist");
             System.out.println("5. Productlist");
-            System.out.println("6. Finish and save");
+            System.out.println("6. Add product to existing customer");
+            System.out.println("7. Finish and save");
             System.out.println("0. Exit and leave");
 
             switch (readNumber()) {
@@ -78,6 +78,9 @@ public class Main {
                     mainObject.productList();
                     break;
                 case 6:
+                    mainObject.addProductToCustomer();
+                    break;
+                case 7:
                     mainObject.finishAndSave();
                     break;
                 default:
@@ -98,7 +101,7 @@ public class Main {
 
     }
 
-    //gör det möjligt att söka efter kunder med deras ID
+    //metod som gör det möjligt att söka efter kunder med deras ID
     private void searchForCustomer() {
 
         System.out.println("Enter customerID:");
@@ -106,30 +109,30 @@ public class Main {
         int id = chosenId;
         Customer customer = cr.getCustomer(id);
         System.out.println(customer);
-        System.out.println(customer.customerList.toString());
+        System.out.println(customer.shoppingCartList);
 
         float totalPrice = 0;
 
-        for(Product product:customer.customerList) {
+        for(Product product:customer.shoppingCartList) {
             totalPrice += product.getPrice();
-
         }
-       //System.out.println("Total price: " + totalPrice + " " + "kr");
+        System.out.println("Total price: " + totalPrice + " " + "kr");
 
                 try {
-            //System.out.println(cr.getCustomer(id));
+//            System.out.println(cr.getCustomer(id));
             //System.out.println(sc.getProducts());
-            System.out.println("Total price: " + totalPrice + " " + "kr");
+        //    System.out.println("Total price: " + totalPrice + " " + "kr");
 
         } catch (IndexOutOfBoundsException e){
             System.out.println("Customer does not exist!");
             System.out.println();
         }
+
         System.out.println("\n");
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         System.out.println("* Choose an option to continue *");
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-        System.out.println("1. Add new product");
+        System.out.println("1. Add new product to shoppingcart");
         System.out.println("2. Save and return to main menu");
         System.out.println("0. Go back to main menu");
 
@@ -165,6 +168,7 @@ public class Main {
                 System.out.println("Enter a number please!");
             }
         } while (!validinput);
+        sc.nextLine();
         return temp;
     }
 
@@ -172,8 +176,8 @@ public class Main {
     private void createNewCustomer() {
 
         System.out.println("Please enter your name: ");
-        String name = input.nextLine();
-        name = firstLetterToUppercase(name);
+        String name = input.nextLine(); //värdet sparas i variabeln name
+        name = firstLetterToUppercase(name); //ser till att första bokstaven blir stor
         System.out.println("Please enter your lastname: ");
         String lastname = input.nextLine();
         lastname = firstLetterToUppercase(lastname);
@@ -181,8 +185,8 @@ public class Main {
         String city = input.nextLine();
         city = firstLetterToUppercase(city);
         //input.nextLine();
-        cr.addCustomer(new Customer(name, lastname, city, ++id));
-        System.out.println("Welcome " + name + " " + lastname + " from " + city + " your customer ID is: " + id);
+        cr.addCustomer(new Customer(name, lastname, city, cr.customers.size()+1)); //sparar i array
+        System.out.println("Welcome " + name + " " + lastname + " from " + city + " your customer ID is: " + cr.customers.size());
         //System.out.println("Welcome " + name + " from " + city + " your customer ID is: " + atomicInteger.addAndGet(++id));
         System.out.println("\n");
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
@@ -202,7 +206,7 @@ public class Main {
                 System.out.println("Option not available!");
         }
         System.out.println("Thank you for saving! Please choose an option below ");
-        System.out.println("1. Add new product");
+        System.out.println("1. Add product to your cart");
         System.out.println("2. See your shoppingcart");
         System.out.println("3. Create another customer");
         System.out.println("4. Return to main menu");
@@ -242,8 +246,8 @@ public class Main {
 
         if (customer != null) {
 
-            for (int i = 0; i < sc.products.size(); i++)
-                System.out.println(sc.products.get(i));
+//            for (int i = 0; i < sc.products.size(); i++)
+//                System.out.println(sc.products.get(i));
 
             System.out.println(pr.products);
             input.nextLine();
@@ -251,13 +255,13 @@ public class Main {
             int chosenProduct = input.nextInt();
             int productID = chosenProduct;
             Product product = pr.getProduct(productID);
-            customer.customerList.add(product);
+            customer.shoppingCartList.add(product);
             System.out.println(customer);
-            System.out.println(customer.customerList.toString());
+            System.out.println(customer.shoppingCartList.toString());
             System.out.println("\n" + "*** Product added ***" + "\n");
             System.out.println("Do you wish to add another product?");
             System.out.println("1. Add another product");
-            System.out.println("2. Save");
+            System.out.println("2. Save and go back to main menu");
             System.out.println("3. Go back to main menu");
             switch (readNumber()) {
                 case 1:
@@ -309,6 +313,7 @@ public class Main {
     //lägger till ny produkt till produktlistan (sparas i en array)
     private void addNewProduct() {
 
+        input.nextLine();
         System.out.println("Enter a productname: ");
         String name = input.nextLine();
         name = firstLetterToUppercase(name);
@@ -352,7 +357,7 @@ public class Main {
     }
 
     //metod för att spara en bin-fil
-    void finishAndSave()
+     void finishAndSave()
         {
             //File file = new File("C:\\Users\\Martin\\Documents\\books.bin");
             String path = System.getProperty("user.home")
@@ -364,7 +369,7 @@ public class Main {
                          new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
                 out.writeObject(cr.customers);
                 out.writeObject(pr.products);
-                //out.writeObject(sc.customer);
+                //out.writeObject();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -408,7 +413,7 @@ public class Main {
         String first = input.substring(0, 1).toUpperCase();
         String rest = input.substring(1).toLowerCase();
 
-        return first + rest;
+        return first + rest; //metoden returnerar variablerna first och rest
     }
 }
 

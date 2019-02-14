@@ -1,5 +1,9 @@
+import org.w3c.dom.css.Counter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ProductRegrister implements Serializable {
 
@@ -18,6 +22,8 @@ public class ProductRegrister implements Serializable {
         }
         return null;
     }
+
+    /* Map<String, long> map = products.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting())); */
 
     @Override
     public String toString() {

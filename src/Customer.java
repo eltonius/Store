@@ -17,20 +17,23 @@ public class Customer implements Serializable {
     private String lastname;
     private String city;
     Product product;
-    static int count = 1;
+    public static int count = 1;
     int id;
     ShoppingCart addNewProduct;
-    ArrayList<Product> customerList = new ArrayList<Product>();
+    ArrayList<Product> shoppingCartList = new ArrayList<>();
 
-    //Konstruktor
+    //Konstruktor - this är en referens till objektet vi skapar -
     public Customer (String name, String lastname, String city, int id) {
 
         this.name = name;
         this.lastname = lastname;
         this.city = city;
-        this.id = count++;
+        this.id = id;
+        //shoppingCartList = new ArrayList<>();
+
     }
-    //Getters
+
+    //Getters - return the type of the variable
     public int getId() {
         return id++;
     }
@@ -44,7 +47,7 @@ public class Customer implements Serializable {
         return lastname;
     }
 
-    //Setters
+    //Setters - takes one argument of the variable type
     public void setId(int id) {
         this.id = id;
     }

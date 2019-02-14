@@ -18,17 +18,11 @@ class CustomerRegisterTest {
 
     }
 
-    //Vet inte om detta är rätt metod? Blev förvirrad, vet inte vad jag har gjort haha...
+
     @Test
     void checksToSeeIfMethod_getCustomer_Works() {
 
-        CustomerRegister customerRegister = new CustomerRegister();
-
-        Customer id = customerRegister.getCustomer(3);
-
-        customerRegister.getCustomer(3);
-
-        assertEquals(id, customerRegister.getCustomer(3));
+;
     }
 
 }
